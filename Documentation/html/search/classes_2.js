@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mainwindow',['MainWindow',['../class_main_window.html',1,'']]]
+  ['plot',['Plot',['../class_plot.html',1,'']]]
 ];

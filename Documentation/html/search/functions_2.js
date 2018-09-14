@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['fftdata',['FFTData',['../class_f_f_t_data.html#a6dc20ab9d5dcfab52017f89925e0dfd5',1,'FFTData']]]
+  ['mainwindow',['MainWindow',['../class_main_window.html#a996c5a2b6f77944776856f08ec30858d',1,'MainWindow']]]
 ];

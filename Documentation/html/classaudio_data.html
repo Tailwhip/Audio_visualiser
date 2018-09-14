@@ -62,7 +62,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classaudio_data-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -85,34 +85,52 @@ Inheritance diagram for audioData:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a80cd854129dbe514218d56ca5b6ee7a8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio_data.html#a80cd854129dbe514218d56ca5b6ee7a8">audioData</a> (QXYSeries *series, QObject *parent=nullptr)</td></tr>
-<tr class="memdesc:a80cd854129dbe514218d56ca5b6ee7a8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio_data.html#a80cd854129dbe514218d56ca5b6ee7a8" title="audioData::audioData is the constructor of class audioData. ">audioData::audioData</a> is the constructor of class <a class="el" href="classaudio_data.html" title="The audioData class provides data samples for plotting in time domain. ">audioData</a>.  <a href="#a80cd854129dbe514218d56ca5b6ee7a8">More...</a><br /></td></tr>
-<tr class="separator:a80cd854129dbe514218d56ca5b6ee7a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa95a9cf2fbfd53084647e35995f7a05e"><td class="memItemLeft" align="right" valign="top"><a id="aa95a9cf2fbfd53084647e35995f7a05e"></a>
+qint64&#160;</td><td class="memItemRight" valign="bottom"><b>timeData</b> (int resolution, int sampleCount, const char *&amp;audio_data, qint64 &amp;max_size)</td></tr>
+<tr class="separator:aa95a9cf2fbfd53084647e35995f7a05e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4882d02c4bf1d458259d90d89ba9f86"><td class="memItemLeft" align="right" valign="top"><a id="aa4882d02c4bf1d458259d90d89ba9f86"></a>
+qint64&#160;</td><td class="memItemRight" valign="bottom"><b>fftData</b> (int resolution, int sampleRate, int sampleCount, const char *&amp;audio_data, qint64 &amp;max_size)</td></tr>
+<tr class="separator:aa4882d02c4bf1d458259d90d89ba9f86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7ae528dd31de6d8a003b04df110edba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio_data.html#ad7ae528dd31de6d8a003b04df110edba">audioData</a> (QXYSeries *series, QObject *parent=nullptr, bool d_type=0)</td></tr>
+<tr class="memdesc:ad7ae528dd31de6d8a003b04df110edba"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio_data.html#ad7ae528dd31de6d8a003b04df110edba" title="audioData::audioData is the constructor of class audioData. ">audioData::audioData</a> is the constructor of class <a class="el" href="classaudio_data.html" title="The audioData class provides data samples for plotting in time domain. ">audioData</a>.  <a href="#ad7ae528dd31de6d8a003b04df110edba">More...</a><br /></td></tr>
+<tr class="separator:ad7ae528dd31de6d8a003b04df110edba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
-Static Public Attributes</h2></td></tr>
-<tr class="memitem:aa414dc760e187d18a12796be7301f112"><td class="memItemLeft" align="right" valign="top"><a id="aa414dc760e187d18a12796be7301f112"></a>
-static const int&#160;</td><td class="memItemRight" valign="bottom"><b>sampleCount</b> = 10000</td></tr>
-<tr class="separator:aa414dc760e187d18a12796be7301f112"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a6121852d0eb192aea9e0e0fc17e1642d"><td class="memItemLeft" align="right" valign="top"><a id="a6121852d0eb192aea9e0e0fc17e1642d"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>t_resolution</b> = 8</td></tr>
+<tr class="separator:a6121852d0eb192aea9e0e0fc17e1642d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d0957ebe628323de8b8d153c48dfca8"><td class="memItemLeft" align="right" valign="top"><a id="a3d0957ebe628323de8b8d153c48dfca8"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>t_sampleCount</b> = 8000</td></tr>
+<tr class="separator:a3d0957ebe628323de8b8d153c48dfca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cdb6d3f562451fb5157b9d9d5e4292f"><td class="memItemLeft" align="right" valign="top"><a id="a0cdb6d3f562451fb5157b9d9d5e4292f"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>f_resolution</b> = 2</td></tr>
+<tr class="separator:a0cdb6d3f562451fb5157b9d9d5e4292f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adeda95926a4b522281325c86ebf82cd0"><td class="memItemLeft" align="right" valign="top"><a id="adeda95926a4b522281325c86ebf82cd0"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>f_sampleCount</b> = 1024</td></tr>
+<tr class="separator:adeda95926a4b522281325c86ebf82cd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d4cad7aad1602510add3e3de3d4dbfa"><td class="memItemLeft" align="right" valign="top"><a id="a0d4cad7aad1602510add3e3de3d4dbfa"></a>
-static const int&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRate</b> = 44100</td></tr>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRate</b> = 44100</td></tr>
 <tr class="separator:a0d4cad7aad1602510add3e3de3d4dbfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a4d585a47c096ec2dc54e0b9cba4b59be"><td class="memItemLeft" align="right" valign="top"><a id="a4d585a47c096ec2dc54e0b9cba4b59be"></a>
 qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio_data.html#a4d585a47c096ec2dc54e0b9cba4b59be">readData</a> (char *data, qint64 maxSize) override</td></tr>
-<tr class="memdesc:a4d585a47c096ec2dc54e0b9cba4b59be"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio_data.html#a4d585a47c096ec2dc54e0b9cba4b59be" title="audioData::readData is a virtual function inherited from IODevice class. Unsused. ...">audioData::readData</a> is a virtual function inherited from IODevice class. Unsused. <br /></td></tr>
+<tr class="memdesc:a4d585a47c096ec2dc54e0b9cba4b59be"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio_data.html#a4d585a47c096ec2dc54e0b9cba4b59be" title="audioData::readData is a virtual function inherited from IODevice class. Unsused in this class...">audioData::readData</a> is a virtual function inherited from IODevice class. Unsused in this class. <br /></td></tr>
 <tr class="separator:a4d585a47c096ec2dc54e0b9cba4b59be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c06618401f7a5ce36aada8389bf6dea"><td class="memItemLeft" align="right" valign="top">qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio_data.html#a7c06618401f7a5ce36aada8389bf6dea">writeData</a> (const char *data, qint64 maxSize) override</td></tr>
-<tr class="memdesc:a7c06618401f7a5ce36aada8389bf6dea"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_f_f_t_data.html#ada4af6a98f6d5e5938b7a2f4af0bc286" title="FFTData::writeData is a virtual function inherited from IODevice class. Writes up to maxSize bytes fr...">FFTData::writeData</a> is a virtual function inherited from IODevice class. Writes up to maxSize bytes from data to the m_series buffer. Collects audio data and make them usefull for plotting in time domain.  <a href="#a7c06618401f7a5ce36aada8389bf6dea">More...</a><br /></td></tr>
+<tr class="memdesc:a7c06618401f7a5ce36aada8389bf6dea"><td class="mdescLeft">&#160;</td><td class="mdescRight">FFTData::writeData is a virtual function inherited from IODevice class. It writes up to maxSize bytes from data to the m_series buffer. Collects audio data and make them usefull for plotting in time domain.  <a href="#a7c06618401f7a5ce36aada8389bf6dea">More...</a><br /></td></tr>
 <tr class="separator:a7c06618401f7a5ce36aada8389bf6dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9aa12bae7ab0544b090534855770a708"><td class="memItemLeft" align="right" valign="top"><a id="a9aa12bae7ab0544b090534855770a708"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>Hann_window</b> (int i, int sampleCount)</td></tr>
+<tr class="separator:a9aa12bae7ab0544b090534855770a708"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classaudio_data.html" title="The audioData class provides data samples for plotting in time domain. ">audioData</a> class provides data samples for plotting in time domain. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a80cd854129dbe514218d56ca5b6ee7a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80cd854129dbe514218d56ca5b6ee7a8">&#9670;&nbsp;</a></span>audioData()</h2>
+<a id="ad7ae528dd31de6d8a003b04df110edba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7ae528dd31de6d8a003b04df110edba">&#9670;&nbsp;</a></span>audioData()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -130,7 +148,13 @@ qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">QObject *&#160;</td>
-          <td class="paramname"><em>parent</em> = <code>nullptr</code>&#160;</td>
+          <td class="paramname"><em>parent</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>d_type</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -145,10 +169,10 @@ qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classaudio_data.html#a80cd854129dbe514218d56ca5b6ee7a8" title="audioData::audioData is the constructor of class audioData. ">audioData::audioData</a> is the constructor of class <a class="el" href="classaudio_data.html" title="The audioData class provides data samples for plotting in time domain. ">audioData</a>. </p>
+<p><a class="el" href="classaudio_data.html#ad7ae528dd31de6d8a003b04df110edba" title="audioData::audioData is the constructor of class audioData. ">audioData::audioData</a> is the constructor of class <a class="el" href="classaudio_data.html" title="The audioData class provides data samples for plotting in time domain. ">audioData</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">series</td><td>are audio data samples collected from the outer device (microphone). </td></tr>
+    <tr><td class="paramname">series</td><td>are audio data samples collected from the outer device (microphone) converted to a form usefull for plotting. </td></tr>
     <tr><td class="paramname">parent</td><td>returns a pointer to the parent object. </td></tr>
   </table>
   </dd>
@@ -191,7 +215,7 @@ qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_f_f_t_data.html#ada4af6a98f6d5e5938b7a2f4af0bc286" title="FFTData::writeData is a virtual function inherited from IODevice class. Writes up to maxSize bytes fr...">FFTData::writeData</a> is a virtual function inherited from IODevice class. Writes up to maxSize bytes from data to the m_series buffer. Collects audio data and make them usefull for plotting in time domain. </p>
+<p>FFTData::writeData is a virtual function inherited from IODevice class. It writes up to maxSize bytes from data to the m_series buffer. Collects audio data and make them usefull for plotting in time domain. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data</td><td>contains collected audio samples. </td></tr>
@@ -203,8 +227,8 @@ qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>Qt_RG/<a class="el" href="audiodata_8h_source.html">audiodata.h</a></li>
-<li>Qt_RG/audiodata.cpp</li>
+<li>Audio_visualiser/<a class="el" href="audiodata_8h_source.html">audiodata.h</a></li>
+<li>Audio_visualiser/audiodata.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
