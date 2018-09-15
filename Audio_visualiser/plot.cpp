@@ -145,12 +145,10 @@ void Plot::showTime()
     axisY->setRange(-1, 1);
     axisY->setTitleText("Audio level");
 
-    chart->setTitle("Audio level in time");
+    chart->setTitle("Audio level vs. time");
 
     audioInput = new QAudioInput(deviceInfo, audioFormat, this);
-
     device->open(QIODevice::WriteOnly);
-
     audioInput->start(device);
 }
 /**
@@ -182,6 +180,7 @@ void Plot::clear()
 Plot::~Plot()
 {
     audioInput->stop();
+    series->clear();
     device->close();
     delete chart;
     delete device;

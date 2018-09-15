@@ -43,6 +43,7 @@ qint64 AudioData::writeData(const char *data, qint64 maxSize)
     else
         return timeData(t_resolution, t_sampleCount, data, maxSize);
 }
+
 /**
  * @brief AudioData::timeData prepares collected data for plotting audio samples in time domain.
  * @param resolution is responsible for ammount of audio data showed in plot.
@@ -68,6 +69,7 @@ qint64 AudioData::timeData(int resolution, int sampleCount, const char *&audioDa
     dataSeries->replace(buffer);
     return (sampleCount - start) * resolution;
 }
+
 /**
  * @brief AudioData::fftData prepares collected data for plotting audio samples in frequency domain - transform data using FFT.
  * @param resolution is responsible for ammount of audio data showed in plot.
@@ -89,30 +91,36 @@ qint64 AudioData::fftData(int resolution, int sampleRate, int sampleCount, const
             buffer[s].setY(buffer.at(s + availableSamples).y());
     }
 
-    //adding harvested samples to buffer:
+    //adding harvested samples into buffer:
     for (int s = start; s < sampleCount; ++s, audioData += resolution){
         buffer[s].setY(qreal(uchar(*audioData)-128) / qreal(128));
     }
 
-    //making complex plan:
+    //making the complex plan in and out:
     fftw_complex in[sampleCount];
     fftw_complex out[sampleCount];
     for (int i = 0; i < sampleCount; ++i){
-        //adding a window function and data to complex plan:
+        //adding a window function and data to the complex plan:
         in[i][REAL] = buffer[i].y() * hannWindow(i, sampleCount);
         in[i][IMAG] = 0;
     }
     //Fourier transformation:
     fftw_plan plan = fftw_plan_dft_1d(sampleCount, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
     fftw_execute(plan);
+
+    //setting data for DC frequency:
+    buffer[0].setY(10 * log10(((out[0][REAL] * out[0][REAL]) + (out[0][IMAG] * out[0][IMAG]))));
+    buffer[0].setX(sampleRate / sampleCount);
+
     /* since only half of computed fft data is needed (rest is mirrored)
-       a proper costants is beeing setted: */
+       a frequency domain length is beeing setted: */
     int halfBuffer = (sampleCount / 2);
+
+    //putting computed data into buffer for the rest of frequency domain:
     double dB_magnitude[halfBuffer];
-    //putting computed data into buffer:
-    for (int i = 0; i < halfBuffer; ++i){
+    for (int i = 1; i < (halfBuffer - 1); ++i){
         //compute magnitude [dB]:
-        dB_magnitude[i] = 10 * log10(((out[i][REAL] * out[i][REAL]) + (out[i][IMAG] * out[i][IMAG])));
+        dB_magnitude[i] = 10 * log10(2*((out[i][REAL] * out[i][REAL]) + (out[i][IMAG] * out[i][IMAG])));
         //setting amplitude:
         buffer[i].setY(dB_magnitude[i]);
         //setting frequency domain:
@@ -123,6 +131,7 @@ qint64 AudioData::fftData(int resolution, int sampleRate, int sampleCount, const
     dataSeries->replace(buffer);
     return (sampleCount - start) * resolution;
 }
+
 /**
  * @brief AudioData::createBuffer provides a zeros filled buffer for audi data.
  * @param sampleCount is an argument using to decide if a new buffer is needed.
