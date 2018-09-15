@@ -4,6 +4,7 @@
 #include <math.h>
 #include <iostream>
 
+#define LOG(x) qDebug("%s:%d: %s", __FUNCTION__, __LINE__, x)
 #define REAL 0
 #define IMAG 1
 
@@ -54,7 +55,6 @@ qint64 AudioData::writeData(const char *data, qint64 maxSize)
 qint64 AudioData::timeData(int resolution, int sampleCount, const char *&audioData, qint64 &maximumSize)
 {
     createBuffer(sampleCount);
-
     int start = 0;
     const int availableSamples = int(maximumSize) / resolution;
     if (availableSamples < sampleCount){
@@ -80,56 +80,65 @@ qint64 AudioData::timeData(int resolution, int sampleCount, const char *&audioDa
  */
 qint64 AudioData::fftData(int resolution, int sampleRate, int sampleCount, const char *&audioData, qint64 &maximumSize)
 {
-    //creating a buffer:
-    createBuffer(sampleCount);
-
-    int start = 0;
-    const int availableSamples = int(maximumSize) / resolution;
-    if (availableSamples < sampleCount){
-        start = sampleCount - availableSamples;
-        for (int s = 0; s < start; ++s)
-            buffer[s].setY(buffer.at(s + availableSamples).y());
+    if (maximumSize < 800) {
+        return maximumSize;
     }
+    sampleCount = maximumSize;
+    qDebug("maximumSize = %d", maximumSize);
+    qDebug("maximumSize = %d", maximumSize);
 
+    QVector<qreal> fftBuffor;
     //adding harvested samples into buffer:
-    for (int s = start; s < sampleCount; ++s, audioData += resolution){
-        buffer[s].setY(qreal(uchar(*audioData)-128) / qreal(128));
+    for (int s = 0; s < maximumSize; ++s, ++audioData){
+        qreal temp = qreal(uchar(*audioData));
+        fftBuffor.push_back(temp);
     }
 
     //making the complex plan in and out:
-    fftw_complex in[sampleCount];
-    fftw_complex out[sampleCount];
-    for (int i = 0; i < sampleCount; ++i){
+    fftw_complex in[maximumSize];
+    fftw_complex out[maximumSize];
+    for (int i = 0; i < maximumSize; ++i){
         //adding a window function and data to the complex plan:
-        in[i][REAL] = buffer[i].y() * hannWindow(i, sampleCount);
+        in[i][REAL] = fftBuffor[i] * hannWindow(i, maximumSize);
         in[i][IMAG] = 0;
+//        qDebug("in[%d]REAL: %d, fftBuffor[%d]: %d", i, in[i][REAL], i, fftBuffor[i]);
     }
+
+
     //Fourier transformation:
-    fftw_plan plan = fftw_plan_dft_1d(sampleCount, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
+    fftw_plan plan = fftw_plan_dft_1d(maximumSize, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
     fftw_execute(plan);
 
     //setting data for DC frequency:
-    buffer[0].setY(10 * log10(((out[0][REAL] * out[0][REAL]) + (out[0][IMAG] * out[0][IMAG]))));
-    buffer[0].setX(sampleRate / sampleCount);
+    QVector<QPointF> localBuffer(0);
+    QPointF firstPoint;
+    firstPoint.setY(log10(((out[0][REAL] * out[0][REAL]) + (out[0][IMAG] * out[0][IMAG]))));
+    firstPoint.setX(sampleRate / maximumSize);
+    localBuffer.push_back(firstPoint);
 
     /* since only half of computed fft data is needed (rest is mirrored)
        a frequency domain length is beeing setted: */
-    int halfBuffer = (sampleCount / 2);
+    int halfBuffer = (maximumSize / 2);
 
     //putting computed data into buffer for the rest of frequency domain:
-    double dB_magnitude[halfBuffer];
-    for (int i = 1; i < (halfBuffer - 1); ++i){
+    for (int i = 1; i < halfBuffer; ++i){
         //compute magnitude [dB]:
-        dB_magnitude[i] = 10 * log10(2*((out[i][REAL] * out[i][REAL]) + (out[i][IMAG] * out[i][IMAG])));
-        //setting amplitude:
-        buffer[i].setY(dB_magnitude[i]);
-        //setting frequency domain:
-        buffer[i].setX(i * (sampleRate / sampleCount));
+        double mag = sqrt((out[i][REAL] * out[i][REAL]) + (out[i][IMAG] * out[i][IMAG]));
+        double magnitude = 20 * log10(mag);
+        magnitude = magnitude * magnitude * magnitude;
+        magnitude = magnitude / 10000;
+        localBuffer.push_back(QPointF(i * (sampleRate / maximumSize), magnitude));
+//        qDebug("creating i: %d x: %d y: %d", i, i * (sampleRate / maximumSize), magnitude);
+    }
+
+    for(int i = 0; i < localBuffer.size(); ++i) {
+        qDebug("i: %f x: %f y: %f", i, localBuffer[i].x(), localBuffer[i].y());
     }
 
     //taking results out of function:
-    dataSeries->replace(buffer);
-    return (sampleCount - start) * resolution;
+    //omijanie rysowanie
+    dataSeries->replace(localBuffer);
+    return maximumSize;
 }
 
 /**

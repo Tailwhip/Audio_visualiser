@@ -14,7 +14,7 @@
 #include <QtWidgets/QVBoxLayout>
 
 #include <math.h>
-
+#define LOG(x) qDebug("%s:%d: %s", __FUNCTION__, __LINE__, x)
 
 QT_CHARTS_USE_NAMESPACE
 /**
@@ -88,7 +88,8 @@ void Plot::setPlot()
  * @brief Plot::showFreq function shows a plot of audio data in frequency domain.
  */
 void Plot::showFreq()
-{ 
+{
+    LOG("dupa");
     if (setPlotFlag==0)
     {
         QMessageBox::warning(nullptr, "audio", "Set the plot first!");
@@ -107,7 +108,7 @@ void Plot::showFreq()
 
     axisX->setRange(0, 15000);
     axisX->setTitleText("Frequency [Hz]");
-    axisY->setRange(0, 80);
+    axisY->setRange(0, 100);
     axisY->setTitleText("Audio level [dB]");
 
     chart->setTitle("Audio spectrum");
