@@ -26,8 +26,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_ButtonStart_clicked()
 {
 
-    if (deviceInfo.isNull())
-    {
+    if (deviceInfo.isNull()){
         QMessageBox::warning(nullptr, "audio", "There is no audio input device available.");
         exit(EXIT_FAILURE);
     }
@@ -42,14 +41,12 @@ void MainWindow::on_ButtonStart_clicked()
  */
 void MainWindow::on_ButtonPause_clicked()
 {
-    if (ui->ButtonPause->text()=="PAUSE")
-    {
+    if (ui->ButtonPause->text()=="PAUSE"){
         ui->ButtonPause->setText("CONTINUE");
         ui->Plot1->pause();
         ui->Plot2->pause();
     }
-    else
-    {
+    else{
         ui->ButtonPause->setText("PAUSE");
         ui->Plot1->start();
         ui->Plot2->start();

@@ -20,25 +20,25 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_audioData_t {
+struct qt_meta_stringdata_AudioData_t {
     QByteArrayData data[1];
     char stringdata0[10];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_audioData_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_AudioData_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_audioData_t qt_meta_stringdata_audioData = {
+static const qt_meta_stringdata_AudioData_t qt_meta_stringdata_AudioData = {
     {
-QT_MOC_LITERAL(0, 0, 9) // "audioData"
+QT_MOC_LITERAL(0, 0, 9) // "AudioData"
 
     },
-    "audioData"
+    "AudioData"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_audioData[] = {
+static const uint qt_meta_data_AudioData[] = {
 
  // content:
        7,       // revision
@@ -54,7 +54,7 @@ static const uint qt_meta_data_audioData[] = {
        0        // eod
 };
 
-void audioData::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void AudioData::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     Q_UNUSED(_o);
     Q_UNUSED(_id);
@@ -62,26 +62,26 @@ void audioData::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject audioData::staticMetaObject = {
-    { &QIODevice::staticMetaObject, qt_meta_stringdata_audioData.data,
-      qt_meta_data_audioData,  qt_static_metacall, nullptr, nullptr}
+QT_INIT_METAOBJECT const QMetaObject AudioData::staticMetaObject = {
+    { &QIODevice::staticMetaObject, qt_meta_stringdata_AudioData.data,
+      qt_meta_data_AudioData,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *audioData::metaObject() const
+const QMetaObject *AudioData::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *audioData::qt_metacast(const char *_clname)
+void *AudioData::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_audioData.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_AudioData.stringdata0))
         return static_cast<void*>(this);
     return QIODevice::qt_metacast(_clname);
 }
 
-int audioData::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int AudioData::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QIODevice::qt_metacall(_c, _id, _a);
     return _id;

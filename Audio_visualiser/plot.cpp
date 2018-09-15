@@ -64,17 +64,14 @@ void Plot::setPlot()
     chart->setPlotAreaBackgroundBrush(plotAreaGradient);
     chart->setPlotAreaBackgroundVisible(true);
 
-    QVBoxLayout *mainLayout = new QVBoxLayout(this);
     mainLayout->addWidget(chartView);
 
-    //QValueAxis *axisX = new QValueAxis;
     axisX->setRange(0, 999);
     axisX->setTitleText("None");
     axisX->setLabelFormat("%g");
     axisX->setLabelsColor(QRgb(0xa6a6a6));
     axisX->setTitleBrush(brush);
 
-    //QValueAxis *axisY = new QValueAxis;
     axisY->setRange(-1, 1);
     axisY->setLabelsColor(QRgb(0xa6a6a6));
     axisY->setTitleBrush(brush);
@@ -99,7 +96,7 @@ void Plot::showFreq()
     }
 
     //setting the device to obtain audio data transformed with FFT
-    device = new audioData(series, this, 1);
+    device = new AudioData(series, this, 1);
 
     audioFormat.setSampleRate(device->sampleRate);
     audioFormat.setChannelCount(1);
@@ -134,7 +131,7 @@ void Plot::showTime()
     }
 
     //setting the device to obtain audio data in time domain
-    device = new audioData(series, this, 0);
+    device = new AudioData(series, this, 0);
 
     audioFormat.setSampleRate(device->sampleRate);
     audioFormat.setChannelCount(1);
@@ -179,10 +176,17 @@ void Plot::clear()
     series->clear();
 }
 /**
- * @brief Plot::~Plot is a destructor of a Plot object.
+ * @brief Plot::~Plot is a destructor of a Plot object. It releases all dynamically allocated objects and variables.
+ * Also cleans up plots.
  */
 Plot::~Plot()
 {
     audioInput->stop();
     device->close();
+    delete chart;
+    delete device;
+    delete audioInput;
+    delete axisX;
+    delete axisY;
+    delete mainLayout;
 }

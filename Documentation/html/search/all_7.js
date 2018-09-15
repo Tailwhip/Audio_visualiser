@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['_7emainwindow',['~MainWindow',['../class_main_window.html#ae98d00a93bc118200eeef9f9bba1dba7',1,'MainWindow']]],
-  ['_7eplot',['~Plot',['../class_plot.html#a277e9c79c4357b3a317d74d61dabefcf',1,'Plot']]]
+  ['setplot',['setPlot',['../class_plot.html#a47009439f2601fd067d14ee2b5f77966',1,'Plot']]],
+  ['showfreq',['showFreq',['../class_plot.html#a2dda4ad495efaf29f584d52a9cf5cb74',1,'Plot']]],
+  ['showtime',['showTime',['../class_plot.html#aef20029a8e567db8337c0188e113eb5d',1,'Plot']]],
+  ['start',['start',['../class_plot.html#ac79428af5d1e03b32454c31e33facb4b',1,'Plot']]]
 ];
