@@ -120,7 +120,7 @@ qint64 AudioData::fftData(int sampleRate, const char *&audioData, qint64 &sample
     int resolution = sampleRate / sampleCount;
     QVector<QPointF> localBuffer(0);
     QPointF DCPoint;
-    DCPoint.setY(log10(((out[0][REAL] * out[0][REAL]) + (out[0][IMAG] * out[0][IMAG])) / 100) - 10);
+    DCPoint.setY(log10((out[0][REAL] * out[0][REAL]) + (out[0][IMAG] * out[0][IMAG])) / 100);
     DCPoint.setX(0);
     localBuffer.push_back(DCPoint);
 
@@ -136,7 +136,8 @@ qint64 AudioData::fftData(int sampleRate, const char *&audioData, qint64 &sample
     }
 
     //taking results out of function
-    *maxFreq = charFreq(localBuffer);
+    maxFreq = charFreq(localBuffer);
+    //std::cout<<"Max: "<<maxFreq<<std::endl;
     dataSeries->replace(localBuffer);
     return sampleCount;
 }
@@ -165,21 +166,22 @@ double AudioData::filter(double magnitude)
 }
 
 /**
- * @brief AudioData::charFreq provides a value of maximum
- * @param buffer
- * @return
+ * @brief AudioData::charFreq provides frequency of the maximum value of fftdata.
+ * @param buffer is the bunch of values search for maximum frequency.
  */
-double AudioData::charFreq(QVector<QPointF> buffer)
+double AudioData::charFreq(QVector<QPointF> &buffer)
 {
     double max = 0;
+    double freq = 0;
 //    if (dataType == 1 && !buffer.isEmpty()) {
-        for (int i = 0; i < buffer.size(); ++i) {
+        for (int i = 40; i < buffer.size(); ++i) {
             if (double (buffer[i].y()) > max) {
                 max = buffer[i].y();
+                freq = buffer[i].x();
             }
         }
 //    }
-    return max;
+    return freq;
 }
 
 /**

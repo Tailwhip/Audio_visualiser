@@ -12,6 +12,8 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QLCDNumber>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -27,11 +29,13 @@ class Ui_MainWindow
 public:
     QWidget *centralWidget;
     QGridLayout *gridLayout;
-    Plot *Plot1;
     Plot *Plot2;
     QPushButton *ButtonStart;
     QPushButton *ButtonPause;
+    Plot *Plot1;
     QPushButton *ButtonClear;
+    QLabel *charFreqLabel;
+    QLCDNumber *lcdNumber;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -50,23 +54,11 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        Plot1 = new Plot(centralWidget);
-        Plot1->setObjectName(QStringLiteral("Plot1"));
+        Plot2 = new Plot(centralWidget);
+        Plot2->setObjectName(QStringLiteral("Plot2"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(Plot1->sizePolicy().hasHeightForWidth());
-        Plot1->setSizePolicy(sizePolicy);
-        Plot1->setContextMenuPolicy(Qt::DefaultContextMenu);
-        Plot1->setAcceptDrops(false);
-        Plot1->setLayoutDirection(Qt::LeftToRight);
-        Plot1->setAutoFillBackground(false);
-        Plot1->setStyleSheet(QStringLiteral(""));
-
-        gridLayout->addWidget(Plot1, 0, 0, 1, 3);
-
-        Plot2 = new Plot(centralWidget);
-        Plot2->setObjectName(QStringLiteral("Plot2"));
         sizePolicy.setHeightForWidth(Plot2->sizePolicy().hasHeightForWidth());
         Plot2->setSizePolicy(sizePolicy);
 
@@ -108,6 +100,18 @@ public:
 
         gridLayout->addWidget(ButtonPause, 2, 1, 1, 1);
 
+        Plot1 = new Plot(centralWidget);
+        Plot1->setObjectName(QStringLiteral("Plot1"));
+        sizePolicy.setHeightForWidth(Plot1->sizePolicy().hasHeightForWidth());
+        Plot1->setSizePolicy(sizePolicy);
+        Plot1->setContextMenuPolicy(Qt::DefaultContextMenu);
+        Plot1->setAcceptDrops(false);
+        Plot1->setLayoutDirection(Qt::LeftToRight);
+        Plot1->setAutoFillBackground(false);
+        Plot1->setStyleSheet(QStringLiteral(""));
+
+        gridLayout->addWidget(Plot1, 0, 0, 1, 3);
+
         ButtonClear = new QPushButton(centralWidget);
         ButtonClear->setObjectName(QStringLiteral("ButtonClear"));
         ButtonClear->setEnabled(false);
@@ -127,10 +131,31 @@ public:
 
         gridLayout->addWidget(ButtonClear, 2, 2, 1, 1);
 
+        charFreqLabel = new QLabel(centralWidget);
+        charFreqLabel->setObjectName(QStringLiteral("charFreqLabel"));
+        charFreqLabel->setEnabled(true);
+        QFont font1;
+        font1.setPointSize(18);
+        font1.setBold(true);
+        font1.setWeight(75);
+        font1.setStrikeOut(false);
+        font1.setKerning(true);
+        charFreqLabel->setFont(font1);
+        charFreqLabel->setAutoFillBackground(false);
+        charFreqLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout->addWidget(charFreqLabel, 3, 0, 1, 1);
+
+        lcdNumber = new QLCDNumber(centralWidget);
+        lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
+        lcdNumber->setSmallDecimalPoint(false);
+
+        gridLayout->addWidget(lcdNumber, 3, 1, 1, 1);
+
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 959, 20));
+        menuBar->setGeometry(QRect(0, 0, 959, 22));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -152,6 +177,7 @@ public:
         ButtonStart->setText(QApplication::translate("MainWindow", "START", nullptr));
         ButtonPause->setText(QApplication::translate("MainWindow", "PAUSE", nullptr));
         ButtonClear->setText(QApplication::translate("MainWindow", "CLEAR", nullptr));
+        charFreqLabel->setText(QApplication::translate("MainWindow", "<html><head/><body><p>Characteristic frequency:</p></body></html>", nullptr));
     } // retranslateUi
 
 };

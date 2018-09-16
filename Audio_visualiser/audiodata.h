@@ -26,8 +26,8 @@ public:
     static const int t_sampleCount = 8000;
     static const int sampleRate = 44100;
     QVector<QPointF> buffer;
-    double charFreq(QVector<QPointF> buffer);
-    double *maxFreq;
+    double charFreq(QVector<QPointF> &buffer);
+    double maxFreq;
 protected:
     qint64 readData(char *data, qint64 maxSize) override;
     qint64 writeData(const char *data, qint64 maxSize) override;

@@ -1,6 +1,7 @@
 #include "plot.h"
 #include "audiodata.h"
 #include "mainwindow.h"
+#include "iostream"
 
 #include <QtMultimedia/QAudioDeviceInfo>
 #include <QtMultimedia/QAudioInput>
@@ -107,7 +108,7 @@ void Plot::showFreq()
     audioFormat.setByteOrder(QAudioFormat::LittleEndian);
     audioFormat.setSampleType(QAudioFormat::UnSignedInt);
 
-    axisX->setRange(0, 15000);
+    axisX->setRange(0, 10000);
     axisX->setTitleText("Frequency [Hz]");
     axisY->setRange(0, 100);
     axisY->setTitleText("Audio level [dB]");
@@ -118,6 +119,7 @@ void Plot::showFreq()
 
     device->open(QIODevice::WriteOnly);
     audioInput->start(device);
+    std::cout<<"max: "<<device->maxFreq<<std::endl;
 }
 
 /**
