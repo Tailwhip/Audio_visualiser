@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "plot.h"
+#include "audiodata.h"
 #include "ui_mainwindow.h"
 #include <QtWidgets/QMessageBox>
 #include <QtMultimedia/QAudioDeviceInfo>
@@ -38,6 +39,7 @@ void MainWindow::on_ButtonStart_clicked()
     ui->ButtonPause->setEnabled(true);
     ui->ButtonClear->setEnabled(true);
     ui->ButtonStart->setEnabled(false);
+    ui->lcdNumber->display(ui->Plot1->device->maxFreq);
 }
 
 /**

@@ -25,15 +25,17 @@ public:
     explicit AudioData(QXYSeries *series, QObject *parent = nullptr, bool d_type = 0);
     static const int t_sampleCount = 8000;
     static const int sampleRate = 44100;
+    QVector<QPointF> buffer;
+    double charFreq(QVector<QPointF> buffer);
+    double *maxFreq;
 protected:
     qint64 readData(char *data, qint64 maxSize) override;
     qint64 writeData(const char *data, qint64 maxSize) override;
     double hannWindow (int i, int sampleCount);
 private:
-    double filter(double magnitude);
     bool dataType = 0;
+    double filter(double magnitude);
     QXYSeries *dataSeries;
-    QVector<QPointF> buffer;
     fftw_plan plan = nullptr;
 };
 

@@ -3,6 +3,7 @@
 #include <fftw3.h>
 #include <math.h>
 #include <iostream>
+#include <algorithm>
 
 #define REAL 0
 #define IMAG 1
@@ -11,6 +12,8 @@
  * @brief audioData::audioData is the constructor of class audioData.
  * @param series are audio data samples collected from the outer device (microphone) converted to a form usefull for plotting.
  * @param parent returns a pointer to the parent object.
+ * @param d_type is a flag deciding which datas (time or FFT) will be returned. 1 returns FFT data, 0 returns
+ * time data.
  */
 AudioData::AudioData(QXYSeries *series, QObject *parent, bool d_type) :
     QIODevice(parent),
@@ -37,7 +40,7 @@ qint64 AudioData::readData(char *data, qint64 maxSize)
  */
 qint64 AudioData::writeData(const char *data, qint64 maxSize)
 {
-    if (dataType == 1){
+    if (dataType == 1) {
         return fftData(sampleRate, data, maxSize);
     }
     else
@@ -54,7 +57,7 @@ qint64 AudioData::timeData(int sampleCount, const char *&audioData, qint64 &maxi
 {
     //creating a buffer if it's needed
     int resolution = 8;
-    if (buffer.isEmpty()){
+    if (buffer.isEmpty()) {
         buffer.reserve(sampleCount);
         for (int i = 0; i < sampleCount; ++i)
             buffer.append(QPointF(i, 0));
@@ -93,9 +96,9 @@ qint64 AudioData::fftData(int sampleRate, const char *&audioData, qint64 &sample
         return sampleCount;
     }
 
-    QVector<qreal> fftBuffer;
     //adding harvested samples into buffer
-    for (int s = 0; s < sampleCount; ++s, ++audioData){
+    QVector<qreal> fftBuffer;
+    for (int s = 0; s < sampleCount; ++s, ++audioData) {
         qreal temp = qreal(uchar(*audioData));
         fftBuffer.push_back(temp);
     }
@@ -103,7 +106,7 @@ qint64 AudioData::fftData(int sampleRate, const char *&audioData, qint64 &sample
     //making the complex plan in and out
     fftw_complex in[sampleCount];
     fftw_complex out[sampleCount];
-    for (int i = 0; i < sampleCount; ++i){
+    for (int i = 0; i < sampleCount; ++i) {
         //adding a window function and data to the complex plan
         in[i][REAL] = fftBuffer[i] * hannWindow(i, int(sampleCount));
         in[i][IMAG] = 0;
@@ -114,25 +117,26 @@ qint64 AudioData::fftData(int sampleRate, const char *&audioData, qint64 &sample
     fftw_execute(plan);
 
     //setting data for DC frequency
+    int resolution = sampleRate / sampleCount;
     QVector<QPointF> localBuffer(0);
     QPointF DCPoint;
-    DCPoint.setY(log10(((out[0][REAL] * out[0][REAL]) + (out[0][IMAG] * out[0][IMAG]))));
+    DCPoint.setY(log10(((out[0][REAL] * out[0][REAL]) + (out[0][IMAG] * out[0][IMAG])) / 100) - 10);
     DCPoint.setX(0);
     localBuffer.push_back(DCPoint);
 
     /* since only half of computed fft data is needed (rest is mirrored)
        a frequency domain length is beeing setted: */
     int halfBuffer = (int(sampleCount) / 2);
-
     //putting computed data into buffer for the rest of frequency domain
-    for (int i = 1; i < halfBuffer; ++i){
+    for (int i = 1; i < halfBuffer; ++i) {
         //compute magnitude [dB]
-        double magnitude = 10 * log10(2*(out[i][REAL] * out[i][REAL]) + (out[i][IMAG] * out[i][IMAG]));
+        double magnitude = 10 * log10((2*(out[i][REAL] * out[i][REAL]) + (out[i][IMAG] * out[i][IMAG])) / 100);
         magnitude = filter(magnitude);
-        localBuffer.push_back(QPointF(i * (sampleRate / sampleCount), magnitude));
+        localBuffer.push_back(QPoint(i * resolution, int(magnitude)));
     }
 
     //taking results out of function
+    *maxFreq = charFreq(localBuffer);
     dataSeries->replace(localBuffer);
     return sampleCount;
 }
@@ -154,7 +158,28 @@ double AudioData::hannWindow(int iterator, int sampleCount)
  */
 double AudioData::filter(double magnitude)
 {
-    return (magnitude * magnitude * magnitude * magnitude) / 1000000;
+    magnitude = (magnitude * magnitude * magnitude) / 8000;
+    if (magnitude < 3)
+            magnitude = 0;
+    return magnitude;
+}
+
+/**
+ * @brief AudioData::charFreq provides a value of maximum
+ * @param buffer
+ * @return
+ */
+double AudioData::charFreq(QVector<QPointF> buffer)
+{
+    double max = 0;
+//    if (dataType == 1 && !buffer.isEmpty()) {
+        for (int i = 0; i < buffer.size(); ++i) {
+            if (double (buffer[i].y()) > max) {
+                max = buffer[i].y();
+            }
+        }
+//    }
+    return max;
 }
 
 /**

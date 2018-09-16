@@ -39,6 +39,7 @@ public:
     void pause();
     void start();
     void clear();
+    AudioData *device = nullptr;
     ~Plot();
 
 private:
@@ -46,7 +47,6 @@ private:
     QValueAxis *axisY = new QValueAxis;
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     QAudioFormat audioFormat;
-    AudioData *device = nullptr;
     QChart *chart;
     QLineSeries *series;
     QAudioInput *audioInput = nullptr;
