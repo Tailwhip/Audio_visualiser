@@ -24,6 +24,5 @@ INSTALLS += target
 FORMS += \
     mainwindow.ui
 
-RESOURCES += \
-    mwbackgroundimg.qrc
+RESOURCES +=
 LIBS += /usr/local/lib/libfftw3.a

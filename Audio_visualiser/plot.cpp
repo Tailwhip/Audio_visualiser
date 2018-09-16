@@ -14,9 +14,9 @@
 #include <QtWidgets/QVBoxLayout>
 
 #include <math.h>
-#define LOG(x) qDebug("%s:%d: %s", __FUNCTION__, __LINE__, x)
 
 QT_CHARTS_USE_NAMESPACE
+
 /**
  * @brief Plot::Plot is the constructor of Plot class.
  * @param parent returns a pointer to the parent object.
@@ -28,6 +28,7 @@ Plot::Plot(QWidget *parent) :
 {
     Plot::setPlot();
 }
+
 /**
  * @brief Plot::setPlot function provides all necessary configurations to set a plot.
  */
@@ -84,12 +85,12 @@ void Plot::setPlot()
 
     setPlotFlag=1;
 }
+
 /**
  * @brief Plot::showFreq function shows a plot of audio data in frequency domain.
  */
 void Plot::showFreq()
 {
-    LOG("dupa");
     if (setPlotFlag==0)
     {
         QMessageBox::warning(nullptr, "audio", "Set the plot first!");
@@ -122,7 +123,6 @@ void Plot::showFreq()
 /**
  * @brief Plot::showTime function shows a plot of audio data in time domain.
  */
-
 void Plot::showTime()
 {
     if (setPlotFlag==0)
@@ -152,6 +152,7 @@ void Plot::showTime()
     device->open(QIODevice::WriteOnly);
     audioInput->start(device);
 }
+
 /**
  * @brief Plot::pause function pauses plots.
  */
@@ -159,6 +160,7 @@ void Plot::pause()
 {
     audioInput->suspend();
 }
+
 /**
  * @brief Plot::start function starts plots.
  */
@@ -166,6 +168,7 @@ void Plot::start()
 {
     audioInput->start(device);
 }
+
 /**
  * @brief Plot::clear function clears plots.
  */
@@ -174,6 +177,7 @@ void Plot::clear()
     audioInput->stop();
     series->clear();
 }
+
 /**
  * @brief Plot::~Plot is a destructor of a Plot object. It releases all dynamically allocated objects and variables.
  * Also cleans up plots.

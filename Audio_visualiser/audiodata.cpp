@@ -4,7 +4,6 @@
 #include <math.h>
 #include <iostream>
 
-#define LOG(x) qDebug("%s:%d: %s", __FUNCTION__, __LINE__, x)
 #define REAL 0
 #define IMAG 1
 
@@ -39,22 +38,31 @@ qint64 AudioData::readData(char *data, qint64 maxSize)
 qint64 AudioData::writeData(const char *data, qint64 maxSize)
 {
     if (dataType == 1){
-        return fftData(f_resolution, sampleRate, f_sampleCount, data, maxSize);
+        return fftData(sampleRate, data, maxSize);
     }
     else
-        return timeData(t_resolution, t_sampleCount, data, maxSize);
+        return timeData(t_sampleCount, data, maxSize);
 }
 
 /**
  * @brief AudioData::timeData prepares collected data for plotting audio samples in time domain.
- * @param resolution is responsible for ammount of audio data showed in plot.
  * @param sampleCount provides number of samples that are going to be delivered for plotting.
  * @param audioData is a bunch of audio samples.
  * @param maximumSize returns a number of maximum audio samples collected from outter device.
  */
-qint64 AudioData::timeData(int resolution, int sampleCount, const char *&audioData, qint64 &maximumSize)
+qint64 AudioData::timeData(int sampleCount, const char *&audioData, qint64 &maximumSize)
 {
-    createBuffer(sampleCount);
+    //creating a buffer if it's needed
+    int resolution = 8;
+    if (buffer.isEmpty()){
+        buffer.reserve(sampleCount);
+        for (int i = 0; i < sampleCount; ++i)
+            buffer.append(QPointF(i, 0));
+    }
+
+    /*not all bunches of samples have the same length so they needs to be groupped to a
+    samplecount bunches
+    */
     int start = 0;
     const int availableSamples = int(maximumSize) / resolution;
     if (availableSamples < sampleCount){
@@ -63,95 +71,70 @@ qint64 AudioData::timeData(int resolution, int sampleCount, const char *&audioDa
             buffer[s].setY(buffer.at(s + availableSamples).y());
     }
 
+    //scalling collected data
     for (int s = start; s < sampleCount; ++s, audioData += resolution)
         buffer[s].setY(qreal(uchar(*audioData)-128) / qreal(128));
 
+    //taking results out of function
     dataSeries->replace(buffer);
     return (sampleCount - start) * resolution;
 }
 
 /**
  * @brief AudioData::fftData prepares collected data for plotting audio samples in frequency domain - transform data using FFT.
- * @param resolution is responsible for ammount of audio data showed in plot.
  * @param sampleRate provides number of samples that are going to be delivered for plotting.
  * @param sampleCount provides number of samples that are going to be delivered for plotting.
  * @param audioData is a bunch of audio samples.
- * @param maximumSize returns a number of maximum audio samples collected from outter device.
  */
-qint64 AudioData::fftData(int resolution, int sampleRate, int sampleCount, const char *&audioData, qint64 &maximumSize)
+qint64 AudioData::fftData(int sampleRate, const char *&audioData, qint64 &sampleCount)
 {
-    if (maximumSize < 800) {
-        return maximumSize;
+    //dont't show bunch of samples less than specified number
+    if (sampleCount < 1024) {
+        return sampleCount;
     }
-    sampleCount = maximumSize;
-    qDebug("maximumSize = %d", maximumSize);
-    qDebug("maximumSize = %d", maximumSize);
 
-    QVector<qreal> fftBuffor;
-    //adding harvested samples into buffer:
-    for (int s = 0; s < maximumSize; ++s, ++audioData){
+    QVector<qreal> fftBuffer;
+    //adding harvested samples into buffer
+    for (int s = 0; s < sampleCount; ++s, ++audioData){
         qreal temp = qreal(uchar(*audioData));
-        fftBuffor.push_back(temp);
+        fftBuffer.push_back(temp);
     }
 
-    //making the complex plan in and out:
-    fftw_complex in[maximumSize];
-    fftw_complex out[maximumSize];
-    for (int i = 0; i < maximumSize; ++i){
-        //adding a window function and data to the complex plan:
-        in[i][REAL] = fftBuffor[i] * hannWindow(i, maximumSize);
+    //making the complex plan in and out
+    fftw_complex in[sampleCount];
+    fftw_complex out[sampleCount];
+    for (int i = 0; i < sampleCount; ++i){
+        //adding a window function and data to the complex plan
+        in[i][REAL] = fftBuffer[i] * hannWindow(i, int(sampleCount));
         in[i][IMAG] = 0;
-//        qDebug("in[%d]REAL: %d, fftBuffor[%d]: %d", i, in[i][REAL], i, fftBuffor[i]);
     }
 
-
-    //Fourier transformation:
-    fftw_plan plan = fftw_plan_dft_1d(maximumSize, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
+    //Fourier transformation
+    fftw_plan plan = fftw_plan_dft_1d(int(sampleCount), in, out, FFTW_FORWARD, FFTW_ESTIMATE);
     fftw_execute(plan);
 
-    //setting data for DC frequency:
+    //setting data for DC frequency
     QVector<QPointF> localBuffer(0);
-    QPointF firstPoint;
-    firstPoint.setY(log10(((out[0][REAL] * out[0][REAL]) + (out[0][IMAG] * out[0][IMAG]))));
-    firstPoint.setX(sampleRate / maximumSize);
-    localBuffer.push_back(firstPoint);
+    QPointF DCPoint;
+    DCPoint.setY(log10(((out[0][REAL] * out[0][REAL]) + (out[0][IMAG] * out[0][IMAG]))));
+    DCPoint.setX(0);
+    localBuffer.push_back(DCPoint);
 
     /* since only half of computed fft data is needed (rest is mirrored)
        a frequency domain length is beeing setted: */
-    int halfBuffer = (maximumSize / 2);
+    int halfBuffer = (int(sampleCount) / 2);
 
-    //putting computed data into buffer for the rest of frequency domain:
+    //putting computed data into buffer for the rest of frequency domain
     for (int i = 1; i < halfBuffer; ++i){
-        //compute magnitude [dB]:
-        double mag = sqrt((out[i][REAL] * out[i][REAL]) + (out[i][IMAG] * out[i][IMAG]));
-        double magnitude = 20 * log10(mag);
-        magnitude = magnitude * magnitude * magnitude;
-        magnitude = magnitude / 10000;
-        localBuffer.push_back(QPointF(i * (sampleRate / maximumSize), magnitude));
-//        qDebug("creating i: %d x: %d y: %d", i, i * (sampleRate / maximumSize), magnitude);
+        //compute magnitude [dB]
+        double magnitude = 10 * log10(2*(out[i][REAL] * out[i][REAL]) + (out[i][IMAG] * out[i][IMAG]));
+        magnitude = filter(magnitude);
+        localBuffer.push_back(QPointF(i * (sampleRate / sampleCount), magnitude));
     }
 
-    for(int i = 0; i < localBuffer.size(); ++i) {
-        qDebug("i: %f x: %f y: %f", i, localBuffer[i].x(), localBuffer[i].y());
-    }
-
-    //taking results out of function:
-    //omijanie rysowanie
+    //taking results out of function
     dataSeries->replace(localBuffer);
-    return maximumSize;
-}
-
-/**
- * @brief AudioData::createBuffer provides a zeros filled buffer for audi data.
- * @param sampleCount is an argument using to decide if a new buffer is needed.
- */
-void AudioData::createBuffer(int sampleCount)
-{
-    if (buffer.isEmpty()){
-        buffer.reserve(sampleCount);
-        for (int i = 0; i < sampleCount; ++i)
-            buffer.append(QPointF(i, 0));
-    }
+    return sampleCount;
 }
 
 /**
@@ -165,11 +148,20 @@ double AudioData::hannWindow(int iterator, int sampleCount)
 }
 
 /**
+ * @brief AudioData::filter function makes fft magnitude easer to read on plot. It reduces a noise and powers
+ * the proper signal.
+ * @param magnitude provides to a function a magnitude to be filterred.
+ */
+double AudioData::filter(double magnitude)
+{
+    return (magnitude * magnitude * magnitude * magnitude) / 1000000;
+}
+
+/**
  * @brief AudioData::~AudioData is an inherited destructor of an AudioData class. Cleans up FFT plan.
  */
 AudioData::~AudioData()
 {
-    //cleaning up a plan:
     fftw_destroy_plan(plan);
     fftw_cleanup();
 }

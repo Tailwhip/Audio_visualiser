@@ -22,6 +22,7 @@ QT_BEGIN_NAMESPACE
 class QAudioInput;
 class QAudioDeviceInfo;
 QT_END_NAMESPACE
+
 /**
  * @brief The Plot class provides plots for time and frequency domain of audio data.
  */

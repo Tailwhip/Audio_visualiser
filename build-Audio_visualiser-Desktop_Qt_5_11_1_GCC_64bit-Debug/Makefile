@@ -53,15 +53,13 @@ OBJECTS_DIR   = ./
 SOURCES       = ../Audio_visualiser/main.cpp \
 		../Audio_visualiser/mainwindow.cpp \
 		../Audio_visualiser/plot.cpp \
-		../Audio_visualiser/audiodata.cpp qrc_mwbackgroundimg.cpp \
-		moc_mainwindow.cpp \
+		../Audio_visualiser/audiodata.cpp moc_mainwindow.cpp \
 		moc_plot.cpp \
 		moc_audiodata.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		plot.o \
 		audiodata.o \
-		qrc_mwbackgroundimg.o \
 		moc_mainwindow.o \
 		moc_plot.o \
 		moc_audiodata.o
@@ -234,6 +232,7 @@ DIST          = /Qt/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/Qt/5.11.1/gcc_64/mkspecs/features/qt_config.prf \
 		/Qt/5.11.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/Qt/5.11.1/gcc_64/mkspecs/features/spec_post.prf \
+		../Audio_visualiser/.qmake.stash \
 		/Qt/5.11.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/Qt/5.11.1/gcc_64/mkspecs/features/toolchain.prf \
 		/Qt/5.11.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -439,6 +438,7 @@ Makefile: ../Audio_visualiser/Audio_visualiser.pro /Qt/5.11.1/gcc_64/mkspecs/lin
 		/Qt/5.11.1/gcc_64/mkspecs/features/qt_config.prf \
 		/Qt/5.11.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/Qt/5.11.1/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/Qt/5.11.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/Qt/5.11.1/gcc_64/mkspecs/features/toolchain.prf \
 		/Qt/5.11.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -459,7 +459,6 @@ Makefile: ../Audio_visualiser/Audio_visualiser.pro /Qt/5.11.1/gcc_64/mkspecs/lin
 		/Qt/5.11.1/gcc_64/mkspecs/features/yacc.prf \
 		/Qt/5.11.1/gcc_64/mkspecs/features/lex.prf \
 		../Audio_visualiser/Audio_visualiser.pro \
-		../Audio_visualiser/mwbackgroundimg.qrc \
 		/Qt/5.11.1/gcc_64/lib/libQt5Charts.prl \
 		/Qt/5.11.1/gcc_64/lib/libQt5Widgets.prl \
 		/Qt/5.11.1/gcc_64/lib/libQt5Multimedia.prl \
@@ -636,6 +635,7 @@ Makefile: ../Audio_visualiser/Audio_visualiser.pro /Qt/5.11.1/gcc_64/mkspecs/lin
 /Qt/5.11.1/gcc_64/mkspecs/features/qt_config.prf:
 /Qt/5.11.1/gcc_64/mkspecs/linux-g++/qmake.conf:
 /Qt/5.11.1/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /Qt/5.11.1/gcc_64/mkspecs/features/exclusive_builds.prf:
 /Qt/5.11.1/gcc_64/mkspecs/features/toolchain.prf:
 /Qt/5.11.1/gcc_64/mkspecs/features/default_pre.prf:
@@ -656,7 +656,6 @@ Makefile: ../Audio_visualiser/Audio_visualiser.pro /Qt/5.11.1/gcc_64/mkspecs/lin
 /Qt/5.11.1/gcc_64/mkspecs/features/yacc.prf:
 /Qt/5.11.1/gcc_64/mkspecs/features/lex.prf:
 ../Audio_visualiser/Audio_visualiser.pro:
-../Audio_visualiser/mwbackgroundimg.qrc:
 /Qt/5.11.1/gcc_64/lib/libQt5Charts.prl:
 /Qt/5.11.1/gcc_64/lib/libQt5Widgets.prl:
 /Qt/5.11.1/gcc_64/lib/libQt5Multimedia.prl:
@@ -677,7 +676,6 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../Audio_visualiser/mwbackgroundimg.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /Qt/5.11.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Audio_visualiser/mainwindow.h ../Audio_visualiser/plot.h ../Audio_visualiser/audiodata.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../Audio_visualiser/main.cpp ../Audio_visualiser/mainwindow.cpp ../Audio_visualiser/plot.cpp ../Audio_visualiser/audiodata.cpp $(DISTDIR)/
@@ -705,15 +703,8 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all: qrc_mwbackgroundimg.cpp
+compiler_rcc_make_all:
 compiler_rcc_clean:
-	-$(DEL_FILE) qrc_mwbackgroundimg.cpp
-qrc_mwbackgroundimg.cpp: ../Audio_visualiser/mwbackgroundimg.qrc \
-		/Qt/5.11.1/gcc_64/bin/rcc \
-		../Audio_visualiser/Img/Dark.jpg \
-		../Audio_visualiser/Img/Dark_polished_steel.jpg
-	/Qt/5.11.1/gcc_64/bin/rcc -name mwbackgroundimg ../Audio_visualiser/mwbackgroundimg.qrc -o qrc_mwbackgroundimg.cpp
-
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -990,6 +981,11 @@ moc_plot.cpp: /Qt/5.11.1/gcc_64/include/QtWidgets/QWidget \
 		/Qt/5.11.1/gcc_64/include/QtCharts/qxyseries.h \
 		/Qt/5.11.1/gcc_64/include/QtCharts/QValueAxis \
 		/Qt/5.11.1/gcc_64/include/QtCharts/qvalueaxis.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/QVBoxLayout \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qboxlayout.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qlayout.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qgridlayout.h \
 		../Audio_visualiser/plot.h \
 		moc_predefs.h \
 		/Qt/5.11.1/gcc_64/bin/moc
@@ -1216,7 +1212,12 @@ ui_mainwindow.h: ../Audio_visualiser/mainwindow.ui \
 		/Qt/5.11.1/gcc_64/include/QtCharts/QXYSeries \
 		/Qt/5.11.1/gcc_64/include/QtCharts/qxyseries.h \
 		/Qt/5.11.1/gcc_64/include/QtCharts/QValueAxis \
-		/Qt/5.11.1/gcc_64/include/QtCharts/qvalueaxis.h
+		/Qt/5.11.1/gcc_64/include/QtCharts/qvalueaxis.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/QVBoxLayout \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qboxlayout.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qlayout.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qgridlayout.h
 	/Qt/5.11.1/gcc_64/bin/uic ../Audio_visualiser/mainwindow.ui -o ui_mainwindow.h
 
 compiler_yacc_decl_make_all:
@@ -1225,7 +1226,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -1385,6 +1386,11 @@ main.o: ../Audio_visualiser/main.cpp ../Audio_visualiser/mainwindow.h \
 		/Qt/5.11.1/gcc_64/include/QtCharts/qxyseries.h \
 		/Qt/5.11.1/gcc_64/include/QtCharts/QValueAxis \
 		/Qt/5.11.1/gcc_64/include/QtCharts/qvalueaxis.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/QVBoxLayout \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qboxlayout.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qlayout.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qgridlayout.h \
 		/Qt/5.11.1/gcc_64/include/QtWidgets/QApplication \
 		/Qt/5.11.1/gcc_64/include/QtWidgets/qapplication.h \
 		/Qt/5.11.1/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1550,7 +1556,32 @@ mainwindow.o: ../Audio_visualiser/mainwindow.cpp ../Audio_visualiser/mainwindow.
 		/Qt/5.11.1/gcc_64/include/QtCharts/qxyseries.h \
 		/Qt/5.11.1/gcc_64/include/QtCharts/QValueAxis \
 		/Qt/5.11.1/gcc_64/include/QtCharts/qvalueaxis.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/QVBoxLayout \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qboxlayout.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qlayout.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qgridlayout.h \
 		ui_mainwindow.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/QApplication \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qapplication.h \
+		/Qt/5.11.1/gcc_64/include/QtCore/qcoreapplication.h \
+		/Qt/5.11.1/gcc_64/include/QtCore/qeventloop.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/Qt/5.11.1/gcc_64/include/QtGui/qguiapplication.h \
+		/Qt/5.11.1/gcc_64/include/QtGui/qinputmethod.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/QGridLayout \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/QMenuBar \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qmenubar.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qmenu.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qaction.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qactiongroup.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/QPushButton \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qpushbutton.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qabstractbutton.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/QStatusBar \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qstatusbar.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/QToolBar \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qtoolbar.h \
 		/Qt/5.11.1/gcc_64/include/QtWidgets/QMessageBox \
 		/Qt/5.11.1/gcc_64/include/QtWidgets/qmessagebox.h \
 		/Qt/5.11.1/gcc_64/include/QtWidgets/qdialog.h
@@ -1706,6 +1737,11 @@ plot.o: ../Audio_visualiser/plot.cpp ../Audio_visualiser/plot.h \
 		/Qt/5.11.1/gcc_64/include/QtCharts/qxyseries.h \
 		/Qt/5.11.1/gcc_64/include/QtCharts/QValueAxis \
 		/Qt/5.11.1/gcc_64/include/QtCharts/qvalueaxis.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/QVBoxLayout \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qboxlayout.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qlayout.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qgridlayout.h \
 		../Audio_visualiser/audiodata.h \
 		/Qt/5.11.1/gcc_64/include/QtCore/QIODevice \
 		/Qt/5.11.1/gcc_64/include/QtCore/QPointF \
@@ -1718,12 +1754,7 @@ plot.o: ../Audio_visualiser/plot.cpp ../Audio_visualiser/plot.h \
 		/Qt/5.11.1/gcc_64/include/QtMultimedia/QAudioDeviceInfo \
 		/Qt/5.11.1/gcc_64/include/QtWidgets/QMessageBox \
 		/Qt/5.11.1/gcc_64/include/QtWidgets/qmessagebox.h \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/qdialog.h \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/QVBoxLayout \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/qboxlayout.h \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/qlayout.h \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/qlayoutitem.h \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/qgridlayout.h
+		/Qt/5.11.1/gcc_64/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o plot.o ../Audio_visualiser/plot.cpp
 
 audiodata.o: ../Audio_visualiser/audiodata.cpp ../Audio_visualiser/audiodata.h \
@@ -1832,9 +1863,6 @@ audiodata.o: ../Audio_visualiser/audiodata.cpp ../Audio_visualiser/audiodata.h \
 		/Qt/5.11.1/gcc_64/include/QtCore/QObject \
 		/Qt/5.11.1/gcc_64/include/QtGui/QBrush
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audiodata.o ../Audio_visualiser/audiodata.cpp
-
-qrc_mwbackgroundimg.o: qrc_mwbackgroundimg.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_mwbackgroundimg.o qrc_mwbackgroundimg.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
