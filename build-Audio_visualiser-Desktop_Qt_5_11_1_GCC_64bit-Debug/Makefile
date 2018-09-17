@@ -232,7 +232,6 @@ DIST          = /Qt/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/Qt/5.11.1/gcc_64/mkspecs/features/qt_config.prf \
 		/Qt/5.11.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/Qt/5.11.1/gcc_64/mkspecs/features/spec_post.prf \
-		../Audio_visualiser/.qmake.stash \
 		/Qt/5.11.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/Qt/5.11.1/gcc_64/mkspecs/features/toolchain.prf \
 		/Qt/5.11.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -438,7 +437,6 @@ Makefile: ../Audio_visualiser/Audio_visualiser.pro /Qt/5.11.1/gcc_64/mkspecs/lin
 		/Qt/5.11.1/gcc_64/mkspecs/features/qt_config.prf \
 		/Qt/5.11.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/Qt/5.11.1/gcc_64/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/Qt/5.11.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/Qt/5.11.1/gcc_64/mkspecs/features/toolchain.prf \
 		/Qt/5.11.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -635,7 +633,6 @@ Makefile: ../Audio_visualiser/Audio_visualiser.pro /Qt/5.11.1/gcc_64/mkspecs/lin
 /Qt/5.11.1/gcc_64/mkspecs/features/qt_config.prf:
 /Qt/5.11.1/gcc_64/mkspecs/linux-g++/qmake.conf:
 /Qt/5.11.1/gcc_64/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /Qt/5.11.1/gcc_64/mkspecs/features/exclusive_builds.prf:
 /Qt/5.11.1/gcc_64/mkspecs/features/toolchain.prf:
 /Qt/5.11.1/gcc_64/mkspecs/features/default_pre.prf:
@@ -1561,27 +1558,11 @@ mainwindow.o: ../Audio_visualiser/mainwindow.cpp ../Audio_visualiser/mainwindow.
 		/Qt/5.11.1/gcc_64/include/QtWidgets/qlayout.h \
 		/Qt/5.11.1/gcc_64/include/QtWidgets/qlayoutitem.h \
 		/Qt/5.11.1/gcc_64/include/QtWidgets/qgridlayout.h \
+		../Audio_visualiser/audiodata.h \
+		/Qt/5.11.1/gcc_64/include/QtCore/QIODevice \
+		/Qt/5.11.1/gcc_64/include/QtCore/QPointF \
+		/Qt/5.11.1/gcc_64/include/QtCore/QVector \
 		ui_mainwindow.h \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/QApplication \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/qapplication.h \
-		/Qt/5.11.1/gcc_64/include/QtCore/qcoreapplication.h \
-		/Qt/5.11.1/gcc_64/include/QtCore/qeventloop.h \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		/Qt/5.11.1/gcc_64/include/QtGui/qguiapplication.h \
-		/Qt/5.11.1/gcc_64/include/QtGui/qinputmethod.h \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/QGridLayout \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/QMenuBar \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/qmenubar.h \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/qmenu.h \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/qaction.h \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/qactiongroup.h \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/QPushButton \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/qpushbutton.h \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/qabstractbutton.h \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/QStatusBar \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/qstatusbar.h \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/QToolBar \
-		/Qt/5.11.1/gcc_64/include/QtWidgets/qtoolbar.h \
 		/Qt/5.11.1/gcc_64/include/QtWidgets/QMessageBox \
 		/Qt/5.11.1/gcc_64/include/QtWidgets/qmessagebox.h \
 		/Qt/5.11.1/gcc_64/include/QtWidgets/qdialog.h

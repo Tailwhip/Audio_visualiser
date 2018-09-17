@@ -4,6 +4,8 @@
 #include <math.h>
 #include <iostream>
 #include <algorithm>
+#include <QTimerEvent>
+#include <QTimer>
 
 #define REAL 0
 #define IMAG 1
@@ -137,7 +139,6 @@ qint64 AudioData::fftData(int sampleRate, const char *&audioData, qint64 &sample
 
     //taking results out of function
     maxFreq = charFreq(localBuffer);
-    //std::cout<<"Max: "<<maxFreq<<std::endl;
     dataSeries->replace(localBuffer);
     return sampleCount;
 }
@@ -173,14 +174,14 @@ double AudioData::charFreq(QVector<QPointF> &buffer)
 {
     double max = 0;
     double freq = 0;
-//    if (dataType == 1 && !buffer.isEmpty()) {
-        for (int i = 40; i < buffer.size(); ++i) {
+    if (dataType == 1 && !buffer.isEmpty()) {
+        for (int i = 30; i < buffer.size(); ++i) {
             if (double (buffer[i].y()) > max) {
                 max = buffer[i].y();
                 freq = buffer[i].x();
             }
         }
-//    }
+    }
     return freq;
 }
 

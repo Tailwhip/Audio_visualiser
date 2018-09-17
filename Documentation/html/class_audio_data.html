@@ -62,6 +62,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="class_audio_data-members.html">List of all members</a>  </div>
@@ -70,7 +71,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The audioData class provides data samples for plotting in time domain.  
+<p>The <a class="el" href="class_audio_data.html" title="The AudioData class provides data samples for plotting in time domain. ">AudioData</a> class provides data samples for plotting in time domain.  
  <a href="class_audio_data.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="audiodata_8h_source.html">audiodata.h</a>&gt;</code></p>
@@ -87,32 +88,29 @@ Inheritance diagram for AudioData:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9ea8a15c0557e215bcb475b5dc86058f"><td class="memItemLeft" align="right" valign="top"><a id="a9ea8a15c0557e215bcb475b5dc86058f"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_data.html#a9ea8a15c0557e215bcb475b5dc86058f">~AudioData</a> () override</td></tr>
-<tr class="memdesc:a9ea8a15c0557e215bcb475b5dc86058f"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_audio_data.html#a9ea8a15c0557e215bcb475b5dc86058f" title="AudioData::~AudioData is an inherited destructor of an AudioData class. Cleans up FFT plan...">AudioData::~AudioData</a> is an inherited destructor of an <a class="el" href="class_audio_data.html" title="The audioData class provides data samples for plotting in time domain. ">AudioData</a> class. Cleans up FFT plan. <br /></td></tr>
+<tr class="memdesc:a9ea8a15c0557e215bcb475b5dc86058f"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_audio_data.html#a9ea8a15c0557e215bcb475b5dc86058f" title="AudioData::~AudioData is an inherited destructor of an AudioData class. Cleans up FFT plan...">AudioData::~AudioData</a> is an inherited destructor of an <a class="el" href="class_audio_data.html" title="The AudioData class provides data samples for plotting in time domain. ">AudioData</a> class. Cleans up FFT plan. <br /></td></tr>
 <tr class="separator:a9ea8a15c0557e215bcb475b5dc86058f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8e15fc17b794cfbb04546ddc319f767"><td class="memItemLeft" align="right" valign="top">qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_data.html#af8e15fc17b794cfbb04546ddc319f767">timeData</a> (int resolution, int sampleCount, const char *&amp;audioData, qint64 &amp;maximumSize)</td></tr>
-<tr class="memdesc:af8e15fc17b794cfbb04546ddc319f767"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_audio_data.html#af8e15fc17b794cfbb04546ddc319f767" title="AudioData::timeData prepares collected data for plotting audio samples in time domain. ">AudioData::timeData</a> prepares collected data for plotting audio samples in time domain.  <a href="#af8e15fc17b794cfbb04546ddc319f767">More...</a><br /></td></tr>
-<tr class="separator:af8e15fc17b794cfbb04546ddc319f767"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf02362667613717bf330c7147432f16"><td class="memItemLeft" align="right" valign="top">qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_data.html#aaf02362667613717bf330c7147432f16">fftData</a> (int resolution, int sampleRate, int sampleCount, const char *&amp;audioData, qint64 &amp;maximumSize)</td></tr>
-<tr class="memdesc:aaf02362667613717bf330c7147432f16"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_audio_data.html#aaf02362667613717bf330c7147432f16" title="AudioData::fftData prepares collected data for plotting audio samples in frequency domain - transform...">AudioData::fftData</a> prepares collected data for plotting audio samples in frequency domain - transform data using FFT.  <a href="#aaf02362667613717bf330c7147432f16">More...</a><br /></td></tr>
-<tr class="separator:aaf02362667613717bf330c7147432f16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfee101d98a42abbd92943273a1df7ea"><td class="memItemLeft" align="right" valign="top">qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_data.html#acfee101d98a42abbd92943273a1df7ea">timeData</a> (int sampleCount, const char *&amp;audioData, qint64 &amp;maximumSize)</td></tr>
+<tr class="memdesc:acfee101d98a42abbd92943273a1df7ea"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_audio_data.html#acfee101d98a42abbd92943273a1df7ea" title="AudioData::timeData prepares collected data for plotting audio samples in time domain. ">AudioData::timeData</a> prepares collected data for plotting audio samples in time domain.  <a href="#acfee101d98a42abbd92943273a1df7ea">More...</a><br /></td></tr>
+<tr class="separator:acfee101d98a42abbd92943273a1df7ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8874caf6a1b1c3e937c40134994c19c1"><td class="memItemLeft" align="right" valign="top">qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_data.html#a8874caf6a1b1c3e937c40134994c19c1">fftData</a> (int sampleRate, const char *&amp;audioData, qint64 &amp;sampleCount)</td></tr>
+<tr class="memdesc:a8874caf6a1b1c3e937c40134994c19c1"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_audio_data.html#a8874caf6a1b1c3e937c40134994c19c1" title="AudioData::fftData prepares collected data for plotting audio samples in frequency domain - transform...">AudioData::fftData</a> prepares collected data for plotting audio samples in frequency domain - transform data using FFT.  <a href="#a8874caf6a1b1c3e937c40134994c19c1">More...</a><br /></td></tr>
+<tr class="separator:a8874caf6a1b1c3e937c40134994c19c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c602a4c64d2a1a86e8644e33a3463e0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_data.html#a4c602a4c64d2a1a86e8644e33a3463e0">AudioData</a> (QXYSeries *series, QObject *parent=nullptr, bool d_type=0)</td></tr>
 <tr class="memdesc:a4c602a4c64d2a1a86e8644e33a3463e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">audioData::audioData is the constructor of class audioData.  <a href="#a4c602a4c64d2a1a86e8644e33a3463e0">More...</a><br /></td></tr>
 <tr class="separator:a4c602a4c64d2a1a86e8644e33a3463e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a9198446be588e11b58a92f603575e492"><td class="memItemLeft" align="right" valign="top"><a id="a9198446be588e11b58a92f603575e492"></a>
+QVector&lt; QPointF &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
+<tr class="separator:a9198446be588e11b58a92f603575e492"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a41fa65f6bee54f673c3fc09757c8c886"><td class="memItemLeft" align="right" valign="top"><a id="a41fa65f6bee54f673c3fc09757c8c886"></a>
-static const int&#160;</td><td class="memItemRight" valign="bottom"><b>t_resolution</b> = 8</td></tr>
-<tr class="separator:a41fa65f6bee54f673c3fc09757c8c886"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa06fa2c8c4b90bcee48f1abfdeb43256"><td class="memItemLeft" align="right" valign="top"><a id="aa06fa2c8c4b90bcee48f1abfdeb43256"></a>
 static const int&#160;</td><td class="memItemRight" valign="bottom"><b>t_sampleCount</b> = 8000</td></tr>
 <tr class="separator:aa06fa2c8c4b90bcee48f1abfdeb43256"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae36164a44e8c668a3858563e0fa31ac1"><td class="memItemLeft" align="right" valign="top"><a id="ae36164a44e8c668a3858563e0fa31ac1"></a>
-static const int&#160;</td><td class="memItemRight" valign="bottom"><b>f_resolution</b> = 2</td></tr>
-<tr class="separator:ae36164a44e8c668a3858563e0fa31ac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26ec59fb6f1addef7221e420dad6ef23"><td class="memItemLeft" align="right" valign="top"><a id="a26ec59fb6f1addef7221e420dad6ef23"></a>
-static const int&#160;</td><td class="memItemRight" valign="bottom"><b>f_sampleCount</b> = 1024</td></tr>
-<tr class="separator:a26ec59fb6f1addef7221e420dad6ef23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f9cd9ec37018c6847ff55c596cd98a5"><td class="memItemLeft" align="right" valign="top"><a id="a9f9cd9ec37018c6847ff55c596cd98a5"></a>
 static const int&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRate</b> = 44100</td></tr>
 <tr class="separator:a9f9cd9ec37018c6847ff55c596cd98a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,7 +129,7 @@ qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 <tr class="separator:a022036e090a85ed41b1a8cbead64a958"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The audioData class provides data samples for plotting in time domain. </p>
+<div class="textblock"><p>The <a class="el" href="class_audio_data.html" title="The AudioData class provides data samples for plotting in time domain. ">AudioData</a> class provides data samples for plotting in time domain. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4c602a4c64d2a1a86e8644e33a3463e0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4c602a4c64d2a1a86e8644e33a3463e0">&#9670;&nbsp;</a></span>AudioData()</h2>
@@ -178,6 +176,7 @@ qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
   <table class="params">
     <tr><td class="paramname">series</td><td>are audio data samples collected from the outer device (microphone) converted to a form usefull for plotting. </td></tr>
     <tr><td class="paramname">parent</td><td>returns a pointer to the parent object. </td></tr>
+    <tr><td class="paramname">d_type</td><td>is a flag deciding which datas (time or FFT) will be returned. 1 returns FFT data, 0 returns time data. </td></tr>
   </table>
   </dd>
 </dl>
@@ -185,8 +184,8 @@ qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aaf02362667613717bf330c7147432f16"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf02362667613717bf330c7147432f16">&#9670;&nbsp;</a></span>fftData()</h2>
+<a id="a8874caf6a1b1c3e937c40134994c19c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8874caf6a1b1c3e937c40134994c19c1">&#9670;&nbsp;</a></span>fftData()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -195,19 +194,7 @@ qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
           <td class="memname">qint64 AudioData::fftData </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>resolution</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>sampleRate</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>sampleCount</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -219,7 +206,7 @@ qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">qint64 &amp;&#160;</td>
-          <td class="paramname"><em>maximumSize</em>&#160;</td>
+          <td class="paramname"><em>sampleCount</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -229,14 +216,12 @@ qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_audio_data.html#aaf02362667613717bf330c7147432f16" title="AudioData::fftData prepares collected data for plotting audio samples in frequency domain - transform...">AudioData::fftData</a> prepares collected data for plotting audio samples in frequency domain - transform data using FFT. </p>
+<p><a class="el" href="class_audio_data.html#a8874caf6a1b1c3e937c40134994c19c1" title="AudioData::fftData prepares collected data for plotting audio samples in frequency domain - transform...">AudioData::fftData</a> prepares collected data for plotting audio samples in frequency domain - transform data using FFT. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">resolution</td><td>is responsible for ammount of audio data showed in plot. </td></tr>
     <tr><td class="paramname">sampleRate</td><td>provides number of samples that are going to be delivered for plotting. </td></tr>
     <tr><td class="paramname">sampleCount</td><td>provides number of samples that are going to be delivered for plotting. </td></tr>
     <tr><td class="paramname">audioData</td><td>is a bunch of audio samples. </td></tr>
-    <tr><td class="paramname">maximumSize</td><td>returns a number of maximum audio samples collected from outter device. </td></tr>
   </table>
   </dd>
 </dl>
@@ -288,8 +273,8 @@ qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 
 </div>
 </div>
-<a id="af8e15fc17b794cfbb04546ddc319f767"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8e15fc17b794cfbb04546ddc319f767">&#9670;&nbsp;</a></span>timeData()</h2>
+<a id="acfee101d98a42abbd92943273a1df7ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfee101d98a42abbd92943273a1df7ea">&#9670;&nbsp;</a></span>timeData()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -297,12 +282,6 @@ qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
         <tr>
           <td class="memname">qint64 AudioData::timeData </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>resolution</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>sampleCount</em>, </td>
         </tr>
@@ -326,10 +305,9 @@ qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_audio_data.html#af8e15fc17b794cfbb04546ddc319f767" title="AudioData::timeData prepares collected data for plotting audio samples in time domain. ">AudioData::timeData</a> prepares collected data for plotting audio samples in time domain. </p>
+<p><a class="el" href="class_audio_data.html#acfee101d98a42abbd92943273a1df7ea" title="AudioData::timeData prepares collected data for plotting audio samples in time domain. ">AudioData::timeData</a> prepares collected data for plotting audio samples in time domain. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">resolution</td><td>is responsible for ammount of audio data showed in plot. </td></tr>
     <tr><td class="paramname">sampleCount</td><td>provides number of samples that are going to be delivered for plotting. </td></tr>
     <tr><td class="paramname">audioData</td><td>is a bunch of audio samples. </td></tr>
     <tr><td class="paramname">maximumSize</td><td>returns a number of maximum audio samples collected from outter device. </td></tr>

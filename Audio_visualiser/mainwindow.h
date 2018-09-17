@@ -18,12 +18,13 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent=nullptr);
     ~MainWindow();
+    double value = 0;
 
 private slots:
     void on_ButtonStart_clicked();
     void on_ButtonPause_clicked();
-
     void on_ButtonClear_clicked();
+    void timerUpdate();
 
 private:
     const QAudioDeviceInfo deviceInfo=QAudioDeviceInfo::defaultInputDevice();

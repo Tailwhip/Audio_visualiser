@@ -6,6 +6,8 @@
 #include <QtCore/QVector>
 #include <QtCharts/QChartGlobal>
 #include <fftw3.h>
+#include <QTimerEvent>
+#include <QTimer>
 
 QT_CHARTS_BEGIN_NAMESPACE
 class QXYSeries;
@@ -28,6 +30,7 @@ public:
     QVector<QPointF> buffer;
     double charFreq(QVector<QPointF> &buffer);
     double maxFreq;
+    QTimer *timer = new QTimer(this);
 protected:
     qint64 readData(char *data, qint64 maxSize) override;
     qint64 writeData(const char *data, qint64 maxSize) override;

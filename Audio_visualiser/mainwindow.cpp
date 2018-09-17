@@ -4,7 +4,9 @@
 #include "ui_mainwindow.h"
 #include <QtWidgets/QMessageBox>
 #include <QtMultimedia/QAudioDeviceInfo>
-
+#include <QTimerEvent>
+#include <QTimer>
+#include <iostream>
 /**
  * @brief MainWindow::MainWindow is a constructor of a MainWindow class.
  * @param parent returns a pointer to the parent object.
@@ -39,7 +41,9 @@ void MainWindow::on_ButtonStart_clicked()
     ui->ButtonPause->setEnabled(true);
     ui->ButtonClear->setEnabled(true);
     ui->ButtonStart->setEnabled(false);
-    ui->lcdNumber->display(ui->Plot1->device->maxFreq);
+    QTimer *timer = ui->Plot1->device->timer;
+    timer->start(200);
+    connect(timer, SIGNAL(timeout()), this, SLOT(timerUpdate()));
 }
 
 /**
@@ -52,7 +56,7 @@ void MainWindow::on_ButtonPause_clicked()
         ui->Plot1->pause();
         ui->Plot2->pause();
     }
-    else{
+    else {
         ui->ButtonPause->setText("PAUSE");
         ui->Plot1->start();
         ui->Plot2->start();
@@ -67,4 +71,10 @@ void MainWindow::on_ButtonClear_clicked()
     ui->Plot1->clear();
     ui->Plot2->clear();
     ui->ButtonPause->setText("CONTINUE");
+}
+
+void MainWindow::timerUpdate()
+{
+    value = ui->Plot1->device->maxFreq;
+    ui->lcdNumber->display(value);
 }
