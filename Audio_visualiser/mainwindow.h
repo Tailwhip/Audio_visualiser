@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QtMultimedia/QAudioDeviceInfo>
+#include <fstream>
 
 namespace Ui {
 
@@ -24,9 +25,14 @@ private slots:
     void on_ButtonStart_clicked();
     void on_ButtonPause_clicked();
     void on_ButtonClear_clicked();
-    void timerUpdate();
+    void maxFreqUpdate();
+    void bufferUpdate();
+
+    void on_ButtonRecord_clicked();
 
 private:
+    QVector<QPointF> buffer;
+    std::fstream file;
     const QAudioDeviceInfo deviceInfo=QAudioDeviceInfo::defaultInputDevice();
     Ui::MainWindow *ui;
 };

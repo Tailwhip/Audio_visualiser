@@ -39,6 +39,7 @@ public:
     void pause();
     void start();
     void clear();
+    void record();
     AudioData *device = nullptr;
     ~Plot();
 

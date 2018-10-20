@@ -30,11 +30,12 @@ public:
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     Plot *Plot2;
+    Plot *Plot1;
+    QLabel *charFreqLabel;
     QPushButton *ButtonStart;
     QPushButton *ButtonPause;
-    Plot *Plot1;
     QPushButton *ButtonClear;
-    QLabel *charFreqLabel;
+    QPushButton *ButtonRecord;
     QLCDNumber *lcdNumber;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
@@ -62,7 +63,34 @@ public:
         sizePolicy.setHeightForWidth(Plot2->sizePolicy().hasHeightForWidth());
         Plot2->setSizePolicy(sizePolicy);
 
-        gridLayout->addWidget(Plot2, 1, 0, 1, 3);
+        gridLayout->addWidget(Plot2, 1, 0, 1, 7);
+
+        Plot1 = new Plot(centralWidget);
+        Plot1->setObjectName(QStringLiteral("Plot1"));
+        sizePolicy.setHeightForWidth(Plot1->sizePolicy().hasHeightForWidth());
+        Plot1->setSizePolicy(sizePolicy);
+        Plot1->setContextMenuPolicy(Qt::DefaultContextMenu);
+        Plot1->setAcceptDrops(false);
+        Plot1->setLayoutDirection(Qt::LeftToRight);
+        Plot1->setAutoFillBackground(false);
+        Plot1->setStyleSheet(QStringLiteral(""));
+
+        gridLayout->addWidget(Plot1, 0, 0, 1, 7);
+
+        charFreqLabel = new QLabel(centralWidget);
+        charFreqLabel->setObjectName(QStringLiteral("charFreqLabel"));
+        charFreqLabel->setEnabled(true);
+        QFont font;
+        font.setPointSize(18);
+        font.setBold(true);
+        font.setWeight(75);
+        font.setStrikeOut(false);
+        font.setKerning(true);
+        charFreqLabel->setFont(font);
+        charFreqLabel->setAutoFillBackground(false);
+        charFreqLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout->addWidget(charFreqLabel, 3, 0, 1, 1);
 
         ButtonStart = new QPushButton(centralWidget);
         ButtonStart->setObjectName(QStringLiteral("ButtonStart"));
@@ -80,13 +108,13 @@ public:
         palette.setBrush(QPalette::Disabled, QPalette::Base, brush);
         palette.setBrush(QPalette::Disabled, QPalette::Window, brush);
         ButtonStart->setPalette(palette);
-        QFont font;
-        font.setFamily(QStringLiteral("Calibri"));
-        font.setPointSize(26);
-        font.setBold(true);
-        font.setItalic(true);
-        font.setWeight(75);
-        ButtonStart->setFont(font);
+        QFont font1;
+        font1.setFamily(QStringLiteral("Calibri"));
+        font1.setPointSize(26);
+        font1.setBold(true);
+        font1.setItalic(true);
+        font1.setWeight(75);
+        ButtonStart->setFont(font1);
         ButtonStart->setStyleSheet(QStringLiteral("background-color: rgb(31, 0, 51);"));
 
         gridLayout->addWidget(ButtonStart, 2, 0, 1, 1);
@@ -94,23 +122,11 @@ public:
         ButtonPause = new QPushButton(centralWidget);
         ButtonPause->setObjectName(QStringLiteral("ButtonPause"));
         ButtonPause->setEnabled(false);
-        ButtonPause->setFont(font);
+        ButtonPause->setFont(font1);
         ButtonPause->setAutoFillBackground(false);
         ButtonPause->setStyleSheet(QStringLiteral("background-color: rgb(31, 0, 51);"));
 
         gridLayout->addWidget(ButtonPause, 2, 1, 1, 1);
-
-        Plot1 = new Plot(centralWidget);
-        Plot1->setObjectName(QStringLiteral("Plot1"));
-        sizePolicy.setHeightForWidth(Plot1->sizePolicy().hasHeightForWidth());
-        Plot1->setSizePolicy(sizePolicy);
-        Plot1->setContextMenuPolicy(Qt::DefaultContextMenu);
-        Plot1->setAcceptDrops(false);
-        Plot1->setLayoutDirection(Qt::LeftToRight);
-        Plot1->setAutoFillBackground(false);
-        Plot1->setStyleSheet(QStringLiteral(""));
-
-        gridLayout->addWidget(Plot1, 0, 0, 1, 3);
 
         ButtonClear = new QPushButton(centralWidget);
         ButtonClear->setObjectName(QStringLiteral("ButtonClear"));
@@ -126,25 +142,29 @@ public:
         palette1.setBrush(QPalette::Disabled, QPalette::Base, brush);
         palette1.setBrush(QPalette::Disabled, QPalette::Window, brush);
         ButtonClear->setPalette(palette1);
-        ButtonClear->setFont(font);
+        ButtonClear->setFont(font1);
         ButtonClear->setStyleSheet(QStringLiteral("background-color: rgb(31, 0, 51);"));
 
         gridLayout->addWidget(ButtonClear, 2, 2, 1, 1);
 
-        charFreqLabel = new QLabel(centralWidget);
-        charFreqLabel->setObjectName(QStringLiteral("charFreqLabel"));
-        charFreqLabel->setEnabled(true);
-        QFont font1;
-        font1.setPointSize(18);
-        font1.setBold(true);
-        font1.setWeight(75);
-        font1.setStrikeOut(false);
-        font1.setKerning(true);
-        charFreqLabel->setFont(font1);
-        charFreqLabel->setAutoFillBackground(false);
-        charFreqLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        ButtonRecord = new QPushButton(centralWidget);
+        ButtonRecord->setObjectName(QStringLiteral("ButtonRecord"));
+        ButtonRecord->setEnabled(true);
+        QPalette palette2;
+        palette2.setBrush(QPalette::Active, QPalette::Button, brush);
+        palette2.setBrush(QPalette::Active, QPalette::Base, brush);
+        palette2.setBrush(QPalette::Active, QPalette::Window, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::Button, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::Base, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::Window, brush);
+        palette2.setBrush(QPalette::Disabled, QPalette::Button, brush);
+        palette2.setBrush(QPalette::Disabled, QPalette::Base, brush);
+        palette2.setBrush(QPalette::Disabled, QPalette::Window, brush);
+        ButtonRecord->setPalette(palette2);
+        ButtonRecord->setFont(font1);
+        ButtonRecord->setStyleSheet(QStringLiteral("background-color: rgb(31, 0, 51);"));
 
-        gridLayout->addWidget(charFreqLabel, 3, 0, 1, 1);
+        gridLayout->addWidget(ButtonRecord, 2, 3, 1, 1);
 
         lcdNumber = new QLCDNumber(centralWidget);
         lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
@@ -174,10 +194,11 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Audio Visualiser", nullptr));
+        charFreqLabel->setText(QApplication::translate("MainWindow", "<html><head/><body><p>Characteristic frequency:</p></body></html>", nullptr));
         ButtonStart->setText(QApplication::translate("MainWindow", "START", nullptr));
         ButtonPause->setText(QApplication::translate("MainWindow", "PAUSE", nullptr));
         ButtonClear->setText(QApplication::translate("MainWindow", "CLEAR", nullptr));
-        charFreqLabel->setText(QApplication::translate("MainWindow", "<html><head/><body><p>Characteristic frequency:</p></body></html>", nullptr));
+        ButtonRecord->setText(QApplication::translate("MainWindow", "RECORD", nullptr));
     } // retranslateUi
 
 };

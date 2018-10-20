@@ -180,6 +180,11 @@ void Plot::clear()
     series->clear();
 }
 
+void Plot::record()
+{
+
+}
+
 /**
  * @brief Plot::~Plot is a destructor of a Plot object. It releases all dynamically allocated objects and variables.
  * Also cleans up plots.

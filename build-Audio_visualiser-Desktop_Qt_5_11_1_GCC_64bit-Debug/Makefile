@@ -1046,6 +1046,10 @@ moc_audiodata.cpp: /Qt/5.11.1/gcc_64/include/QtCore/QIODevice \
 		/Qt/5.11.1/gcc_64/include/QtCharts/QChartGlobal \
 		/Qt/5.11.1/gcc_64/include/QtCharts/qchartglobal.h \
 		/Qt/5.11.1/gcc_64/include/QtCore/QtGlobal \
+		/Qt/5.11.1/gcc_64/include/QtCore/QTimerEvent \
+		/Qt/5.11.1/gcc_64/include/QtCore/QTimer \
+		/Qt/5.11.1/gcc_64/include/QtCore/qtimer.h \
+		/Qt/5.11.1/gcc_64/include/QtCore/qbasictimer.h \
 		../Audio_visualiser/audiodata.h \
 		moc_predefs.h \
 		/Qt/5.11.1/gcc_64/bin/moc
@@ -1562,6 +1566,10 @@ mainwindow.o: ../Audio_visualiser/mainwindow.cpp ../Audio_visualiser/mainwindow.
 		/Qt/5.11.1/gcc_64/include/QtCore/QIODevice \
 		/Qt/5.11.1/gcc_64/include/QtCore/QPointF \
 		/Qt/5.11.1/gcc_64/include/QtCore/QVector \
+		/Qt/5.11.1/gcc_64/include/QtCore/QTimerEvent \
+		/Qt/5.11.1/gcc_64/include/QtCore/QTimer \
+		/Qt/5.11.1/gcc_64/include/QtCore/qtimer.h \
+		/Qt/5.11.1/gcc_64/include/QtCore/qbasictimer.h \
 		ui_mainwindow.h \
 		/Qt/5.11.1/gcc_64/include/QtWidgets/QMessageBox \
 		/Qt/5.11.1/gcc_64/include/QtWidgets/qmessagebox.h \
@@ -1727,6 +1735,10 @@ plot.o: ../Audio_visualiser/plot.cpp ../Audio_visualiser/plot.h \
 		/Qt/5.11.1/gcc_64/include/QtCore/QIODevice \
 		/Qt/5.11.1/gcc_64/include/QtCore/QPointF \
 		/Qt/5.11.1/gcc_64/include/QtCore/QVector \
+		/Qt/5.11.1/gcc_64/include/QtCore/QTimerEvent \
+		/Qt/5.11.1/gcc_64/include/QtCore/QTimer \
+		/Qt/5.11.1/gcc_64/include/QtCore/qtimer.h \
+		/Qt/5.11.1/gcc_64/include/QtCore/qbasictimer.h \
 		../Audio_visualiser/mainwindow.h \
 		/Qt/5.11.1/gcc_64/include/QtWidgets/QMainWindow \
 		/Qt/5.11.1/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -1797,6 +1809,10 @@ audiodata.o: ../Audio_visualiser/audiodata.cpp ../Audio_visualiser/audiodata.h \
 		/Qt/5.11.1/gcc_64/include/QtCharts/QChartGlobal \
 		/Qt/5.11.1/gcc_64/include/QtCharts/qchartglobal.h \
 		/Qt/5.11.1/gcc_64/include/QtCore/QtGlobal \
+		/Qt/5.11.1/gcc_64/include/QtCore/QTimerEvent \
+		/Qt/5.11.1/gcc_64/include/QtCore/QTimer \
+		/Qt/5.11.1/gcc_64/include/QtCore/qtimer.h \
+		/Qt/5.11.1/gcc_64/include/QtCore/qbasictimer.h \
 		/Qt/5.11.1/gcc_64/include/QtCharts/QXYSeries \
 		/Qt/5.11.1/gcc_64/include/QtCharts/qxyseries.h \
 		/Qt/5.11.1/gcc_64/include/QtCharts/QAbstractSeries \

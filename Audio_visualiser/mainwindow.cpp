@@ -7,6 +7,8 @@
 #include <QTimerEvent>
 #include <QTimer>
 #include <iostream>
+#include <fstream>
+
 /**
  * @brief MainWindow::MainWindow is a constructor of a MainWindow class.
  * @param parent returns a pointer to the parent object.
@@ -31,7 +33,6 @@ MainWindow::~MainWindow()
  */
 void MainWindow::on_ButtonStart_clicked()
 {
-
     if (deviceInfo.isNull()){
         QMessageBox::warning(nullptr, "audio", "There is no audio input device available.");
         exit(EXIT_FAILURE);
@@ -43,7 +44,7 @@ void MainWindow::on_ButtonStart_clicked()
     ui->ButtonStart->setEnabled(false);
     QTimer *timer = ui->Plot1->device->timer;
     timer->start(200);
-    connect(timer, SIGNAL(timeout()), this, SLOT(timerUpdate()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(maxFreqUpdate()));
 }
 
 /**
@@ -73,8 +74,34 @@ void MainWindow::on_ButtonClear_clicked()
     ui->ButtonPause->setText("CONTINUE");
 }
 
-void MainWindow::timerUpdate()
+void MainWindow::maxFreqUpdate()
 {
     value = ui->Plot1->device->maxFreq;
     ui->lcdNumber->display(value);
+}
+
+void MainWindow::bufferUpdate()
+{
+    buffer = ui->Plot2->device->buffer;
+    file.open("/home/tsim/Audio_Visualizer/Audio_visualiser/data.txt", std::ios::out);
+    for (int i = 0; i < buffer.size(); ++i){
+        file<<buffer[i].y()<<" ";
+        file<<buffer[i].x()<<std::endl;
+    }
+}
+
+void MainWindow::on_ButtonRecord_clicked()
+{
+    if (ui->ButtonRecord->text()=="RECORD"){
+        ui->ButtonRecord->setText("STOP");
+        QTimer *timer = ui->Plot2->device->timer;
+        timer->start(100);
+        connect(timer, SIGNAL(timeout()), this, SLOT(bufferUpdate()));
+    }
+    else {
+        ui->ButtonRecord->setText("RECORD");
+        file.close();
+        file.clear();
+    }
+
 }
