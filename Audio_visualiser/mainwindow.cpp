@@ -83,9 +83,8 @@ void MainWindow::maxFreqUpdate()
 void MainWindow::bufferUpdate()
 {
     buffer = ui->Plot2->device->buffer;
-    file.open("/home/tsim/Audio_Visualizer/Audio_visualiser/data.txt", std::ios::out);
     for (int i = 0; i < buffer.size(); ++i){
-        file<<buffer[i].y()<<" ";
+        file<<"in: "<<buffer[i].y()<<" ";
         file<<buffer[i].x()<<std::endl;
     }
 }
@@ -94,6 +93,7 @@ void MainWindow::on_ButtonRecord_clicked()
 {
     if (ui->ButtonRecord->text()=="RECORD"){
         ui->ButtonRecord->setText("STOP");
+        file.open("/home/tsim/Audio_Visualizer/Audio_visualiser/data.txt", std::ios::out);
         QTimer *timer = ui->Plot2->device->timer;
         timer->start(100);
         connect(timer, SIGNAL(timeout()), this, SLOT(bufferUpdate()));
@@ -101,7 +101,7 @@ void MainWindow::on_ButtonRecord_clicked()
     else {
         ui->ButtonRecord->setText("RECORD");
         file.close();
-        file.clear();
+        //file.clear();
     }
 
 }

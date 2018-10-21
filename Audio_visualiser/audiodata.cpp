@@ -58,7 +58,7 @@ qint64 AudioData::writeData(const char *data, qint64 maxSize)
 qint64 AudioData::timeData(int sampleCount, const char *&audioData, qint64 &maximumSize)
 {
     //creating a buffer if it's needed
-    int resolution = 8;
+    int resolution = 2;
     if (buffer.isEmpty()) {
         buffer.reserve(sampleCount);
         for (int i = 0; i < sampleCount; ++i)
